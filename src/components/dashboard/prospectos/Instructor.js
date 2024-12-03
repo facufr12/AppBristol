@@ -211,7 +211,7 @@ const Instructor = () => {
                           handleEstadoChange(person, e.target.value)
                         }
                         className="text-dark ms-3"
-                        style={{ marginLeft: "10px", width: "150px" }}
+                        style={{ marginLeft: "10px", width: "200px" }}
                       >
                         {estados.map((estado, index) => (
                           <option key={index} value={estado}>
