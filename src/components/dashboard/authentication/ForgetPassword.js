@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Card, Form, Button, Image } from 'react-bootstrap';
-import Logo from "../../../assets/images/logo-cober.svg"
+import Logo from "../../../assets/images/logo-bristol.svg"
 
 
 const ForgetPassword = () => {

@@ -57,7 +57,7 @@ const QuickMenu = () => {
             <div
               className="avatar avatar-md avatar-indicators avatar-online"
               style={{
-                backgroundColor: "#754ffe",
+                backgroundColor: "#0C662C",
                 color: "white",
                 width: "50px",
                 height: "50px",
@@ -83,7 +83,7 @@ const QuickMenu = () => {
                 <div
                   className="avatar avatar-md avatar-indicators avatar-online"
                   style={{
-                    backgroundColor: "#754ffe",
+                    backgroundColor: "#0C662C",
                     color: "white",
                     width: "50px",
                     height: "50px",
@@ -137,7 +137,7 @@ const QuickMenu = () => {
               <div
                 className="avatar avatar-md avatar-indicators avatar-online"
                 style={{
-                  backgroundColor: "#754ffe",
+                  backgroundColor: "#0C662C",
                   color: "white",
                   width: "60px",
                   height: "60px",

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Toast, ToastContainer, Image } from "react-bootstrap";
-import Logo from "../../../assets/images/logo-cober.svg";
+import Logo from "../../../assets/images/logo-bristol.svg";
 
 const CustomToast = ({
   show,
@@ -20,7 +20,7 @@ const CustomToast = ({
   }, [show, duration, onClose]);
 
   // Define el color de fondo según `variant`
-  const backgroundColor = variant === "danger" ? "#dc3545" : "#754ffe"; // Rojo para error, azul para éxito
+  const backgroundColor = variant === "danger" ? "#dc3545" : "#0C662C"; // Rojo para error, azul para éxito
 
   return (
     <ToastContainer

@@ -12,7 +12,7 @@ import {
 } from 'react-bootstrap';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import InverseLogo from 'assets/images/logo-cober.svg';
+import InverseLogo from 'assets/images/logo-bristol.svg';
 import { DashboardMenu } from 'routes/dashboard/DashboardRoutes';
 
 const NavbarVertical = (props) => {

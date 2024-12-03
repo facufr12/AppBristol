@@ -155,7 +155,7 @@ const Instructor = () => {
                       <div
                         className="avatar"
                         style={{
-                          backgroundColor: "#754ffe",
+                          backgroundColor: "#0C662C",
                           color: "white",
                           width: "70px",
                           height: "70px",
@@ -180,7 +180,7 @@ const Instructor = () => {
                     </div>
                     <h6
                       className="text-uppercase mb-1"
-                      style={{ color: "#754ffe" }}
+                      style={{ color: "#0C662C" }}
                     >
                       {person.partido || "SIN PARTIDO"}
                     </h6>
@@ -278,7 +278,7 @@ const Instructor = () => {
                           role="progressbar"
                           style={{
                             width: `${person.evolucion}%`,
-                            backgroundColor: "#754ffe",
+                            backgroundColor: "#0C662C",
                           }}
                           aria-valuenow={person.evolucion}
                           aria-valuemin="0"
@@ -291,7 +291,7 @@ const Instructor = () => {
                           top: "-25px", // Ajusta la posición vertical según sea necesario
                           left: "50%",
                           transform: "translateX(-50%)",
-                          color: "#754ffe",
+                          color: "#0C662C",
                           fontWeight: "bold",
                         }}
                       >

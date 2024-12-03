@@ -14,7 +14,7 @@ import DocumentMenu from 'layouts/marketing/navbars/DocumentMenu';
 import QuickMenu from 'layouts/QuickMenu';
 
 // import media files
-import Logo from 'assets/images/logo-cober.svg';
+import Logo from 'assets/images/logo-bristol.svg';
 
 // import routes file
 import NavbarTopRoutes from 'routes/dashboard/NavbarTopRoutes';

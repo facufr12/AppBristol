@@ -15,7 +15,7 @@ import {
 // import custom components
 
 // import media files
-import Logo from 'assets/images/logo-cober.svg';
+import Logo from 'assets/images/logo-bristol.svg';
 
 // import routes file
 import { DashboardMenu } from 'routes/dashboard/DashboardRoutes';

@@ -1,6 +1,6 @@
 {
-  "name": "geeks-react",
-  "version": "2.3.0",
+  "name": "Crudsales Bristol",
+  "version": "1.0",
   "private": true,
   "dependencies": {
     "@fullcalendar/bootstrap5": "^6.1.15",

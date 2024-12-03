@@ -6,10 +6,19 @@ const ToastContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(() => {
-    // Cargar datos de localStorage al iniciar
+    // Cargar datos de localStorage al iniciar de manera segura
     const savedUserData = localStorage.getItem("userData");
-    return savedUserData ? JSON.parse(savedUserData) : null;
+
+    try {
+      // Intentar parsear el valor de localStorage si existe
+      return savedUserData ? JSON.parse(savedUserData) : null;
+    } catch (e) {
+      // Si ocurre un error, lo logueamos y devolvemos null
+      console.error("Error parsing userData from localStorage", e);
+      return null;
+    }
   });
+
   const [toastData, setToastData] = useState({
     show: false,
     message: "",
@@ -25,9 +34,13 @@ export const AuthProvider = ({ children }) => {
   // Efecto para guardar userData en localStorage cada vez que cambia
   useEffect(() => {
     if (userData) {
-      localStorage.setItem("userData", JSON.stringify(userData));
+      try {
+        localStorage.setItem("userData", JSON.stringify(userData)); // Guardar datos en localStorage
+      } catch (e) {
+        console.error("Error saving userData to localStorage", e); // Manejar errores al guardar
+      }
     } else {
-      localStorage.removeItem("userData"); // Limpia el localStorage al cerrar sesión
+      localStorage.removeItem("userData"); // Limpiar localStorage si no hay userData
     }
   }, [userData]);
 
