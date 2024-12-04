@@ -25,7 +25,7 @@ const ProspectForm = ({ show, handleClose }) => {
     // Realiza la petición fetch
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxNn3wU0BDPbf6laTTq3PCaq6N7SkyVIdrzrKZkWrUW0pzcHU0Ku-tMQiZVsl6pZBRSGA/exec?func=añadirDato",
+        "https://script.google.com/macros/s/AKfycbzMtfpBMeA-suybFvBj3ueI59yVJhGKx0pSb9tHG0VakZO0aWrZBoipTiMiXYGRCRt8/exec?func=añadirDato",
         {
           method: "POST",
           body: JSON.stringify({
