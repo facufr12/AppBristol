@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Card, Form, Button, Image } from "react-bootstrap";
-import Logo from "../../../assets/images/logo-bristol.svg";
+import Logo from "../../../assets/images/logo-bristol.png";
 import DarkLightMode from "layouts/DarkLightMode"; // Asegúrate de que la ruta sea correcta
 
 const SignUp = () => {

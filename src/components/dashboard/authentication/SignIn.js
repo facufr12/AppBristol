@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Col, Row, Card, Form, Button, Image, Spinner } from "react-bootstrap";
-import Logo from "../../../assets/images/logo-bristol.svg";
+import Logo from "../../../assets/images/logo-bristol.png";
 import DarkLightMode from "layouts/DarkLightMode";
 import authService from "./authService";
 import { useAuth } from './AuthContext';
@@ -158,7 +158,6 @@ const SignIn = () => {
                                     )}
                                 </Row>
                             </Form>
-                            <hr className="my-4" />
                         </Card.Body>
                     </Card>
                 </Col>
