@@ -40,7 +40,7 @@ const ProjectSummary = () => {
 
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxNn3wU0BDPbf6laTTq3PCaq6N7SkyVIdrzrKZkWrUW0pzcHU0Ku-tMQiZVsl6pZBRSGA/exec?func=agregarComentario",
+        "https://script.google.com/macros/s/AKfycbw7lMBpzo-XPhZ3yuWwcotg3Xeawk2HUeZeNBd9i5xubF5OyMg63I7vhokA45HX3HFX3A/exec?func=agregarComentario",
         {
           method: "POST",
           body: JSON.stringify(data),
@@ -103,6 +103,17 @@ const ProjectSummary = () => {
   if (!prospecto) {
     return <p>No hay información de prospecto disponible.</p>;
   }
+
+  const getMailToLink = (email) => {
+    if (!email) {
+      console.error("Correo electrónico no proporcionado.");
+      return "#";
+    }
+
+    const subject = "Consulta sobre los servicios";
+    const body = "Hola, me gustaría recibir más información.";
+    return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
 
   const getWhatsAppLink = (number) => {
     if (!number) {
@@ -219,7 +230,7 @@ const ProjectSummary = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <FaWhatsapp size={20} className="text-success" />
+                    <FaWhatsapp size={30} className="text-success" />
                   </a>
                 </div>
               </div>
@@ -248,9 +259,13 @@ const ProjectSummary = () => {
                   </div>
                 </div>
                 <div>
-                  <p className="text-dark mb-0 fw-semi-bold">
-                    {prospecto.correo || "SIN CORREO"}
-                  </p>
+                 <a
+                    href={getMailToLink(prospecto.correo)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <BsFillEnvelopeOpenFill size={30} className="text-info" />
+                  </a>
                 </div>
               </div>
             </ListGroup.Item>
