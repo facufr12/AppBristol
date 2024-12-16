@@ -253,7 +253,7 @@ const Instructor = () => {
                     <span className="text-dark d-flex align-items-center">
   <a
     href={`https://wa.me/+54${person.cel}?text=${encodeURIComponent(
-        "Hola, cómo estás? te escribo de Bristol Medicine | Medicina Por Mèdicos"
+        "Hola, cómo estás? te escribo de Bristol Medicine | Medicina Por Médicos"
     )}`}
     target="_blank"
     rel="noopener noreferrer"
