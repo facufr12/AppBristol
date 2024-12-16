@@ -26,22 +26,24 @@ const Instructor = () => {
   const [showModal, setShowModal] = useState(false);
   const { userData } = useAuth();
   const estados = [
-    "Cotizacion Enviada",
-    "Desestimado Preexistencia",
-    "Desestimado Fuera de Zona",
-    "Desestimado por Edad",
-    "Pasa de Vigencia",
-    "No Contesta",
-    "Prueba Interna",
-    "Busca Aporte x Aporte",
-    "No Contesta",
-    "Ya es Socio",
-    "Buscas Otra Cobertura",
-    "Teléfono Erróneo",
-    "Email Erróneo",
-    "No le Interesa por Costos",
-    "No le Interesa por Cartilla",
-    "Tomó Otra Cobertura",
+    "Lead",
+    "1º Contacto",
+    "Calificado Cotización ",
+    "Calificado Póliza ",
+    "Calificado Pago",
+    "Venta",
+    "Fuera de zona",
+    "Fuera de edad",
+    "Preexistencia",
+    "Reafiliación",
+    "No contesta",
+    "prueba interna",
+    "Ya es socio",
+    "Busca otra Cobertura",
+    "Teléfono erróneo",
+    "No le interesa (económico)",
+    
+    "No le interesa cartilla",
   ];
 
   const navigate = useNavigate();
