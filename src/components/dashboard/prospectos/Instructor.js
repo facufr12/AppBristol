@@ -26,30 +26,28 @@ const Instructor = () => {
   const [showModal, setShowModal] = useState(false);
   const { userData } = useAuth();
   const estados = [
-    "Lead",
-    "1º Contacto",
-    "Calificado Cotización ",
-    "Calificado Póliza ",
-    "Calificado Pago",
-    "Venta",
-    "Fuera de zona",
-    "Fuera de edad",
-    "Preexistencia",
-    "Reafiliación",
-    "No contesta",
-    "prueba interna",
-    "Ya es socio",
-    "Busca otra Cobertura",
-    "Teléfono erróneo",
-    "No le interesa (económico)",
-    
-    "No le interesa cartilla",
+    "Cotizacion Enviada",
+    "Desestimado Preexistencia",
+    "Desestimado Fuera de Zona",
+    "Desestimado por Edad",
+    "Pasa de Vigencia",
+    "No Contesta",
+    "Prueba Interna",
+    "Busca Aporte x Aporte",
+    "No Contesta",
+    "Ya es Socio",
+    "Buscas Otra Cobertura",
+    "Teléfono Erróneo",
+    "Email Erróneo",
+    "No le Interesa por Costos",
+    "No le Interesa por Cartilla",
+    "Tomó Otra Cobertura",
   ];
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const apiUrl = `https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?vendedor=${userData.vendedor}&func=obtenerDatos`;
+    const apiUrl = `https://script.google.com/macros/s/AKfycbzMtfpBMeA-suybFvBj3ueI59yVJhGKx0pSb9tHG0VakZO0aWrZBoipTiMiXYGRCRt8/exec?vendedor=${userData.vendedor}&func=obtenerDatos`;
   
     const fetchGoogleSheetsData = async () => {
       try {
@@ -96,7 +94,7 @@ const Instructor = () => {
     setIsLoading(true); // Deshabilitar el botón
     try {
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbxNn3wU0BDPbf6laTTq3PCaq6N7SkyVIdrzrKZkWrUW0pzcHU0Ku-tMQiZVsl6pZBRSGA/exec?func=cambiarEstadoDato",
+        "https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?func=cambiarEstadoDato",
         {
           method: "POST",
           body: JSON.stringify({ id, estado }),
@@ -253,7 +251,7 @@ const Instructor = () => {
                     <span className="text-dark d-flex align-items-center">
   <a
     href={`https://wa.me/+54${person.cel}?text=${encodeURIComponent(
-        "Hola, cómo estás? te escribo de Bristol Medicine | Medicina Por Médicos"
+        "Hola, te contacto de Cober para poder ayudarte a Cotizar tu plan."
     )}`}
     target="_blank"
     rel="noopener noreferrer"
