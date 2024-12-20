@@ -1,5 +1,5 @@
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzMtfpBMeA-suybFvBj3ueI59yVJhGKx0pSb9tHG0VakZO0aWrZBoipTiMiXYGRCRt8/exec?func=login";
+  "https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?func=login";
 
 const login = async (credentials) => {
   try {
