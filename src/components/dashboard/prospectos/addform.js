@@ -236,45 +236,51 @@ const ProspectForm = ({ show, handleClose }) => {
 
             <Form.Group controlId="estado">
               <Form.Label style={{ marginTop: "1rem" }}>Estado</Form.Label>
-              <Form.Control
+                  <Form.Control
                 as="select"
                 value={estado}
                 onChange={(e) => setEstado(e.target.value)}
                 required
               >
                 <option value="">Selecciona un estado</option>
-                <option value="Cotizacion Enviada">Cotizacion Enviada</option>
-                <option value="Desestimado Preexistencia">
-                  Desestimado Preexistencia
+                <option value="Lead"> Lead </option>
+                <option value="Primercontacto">
+                1º Contacto
                 </option>
-                <option value="Desestimado Fuera de Zona">
-                  Desestimado Fuera de Zona
+                <option value="CalificadoCotización ">
+                Calificado Cotización 
                 </option>
-                <option value="Desestimado por Edad">
-                  Desestimado por Edad
+                <option value="CalificadoPóliza ">
+                Calificado Póliza 
                 </option>
-                <option value="No Contesta">No Contesta</option>
-                <option value="Prueba Interna">Prueba Interna</option>
-                <option value="Busca Aporte x Aporte">
-                  Busca Aporte x Aporte
+                <option value="CalificadoPago">Calificado Pago</option>
+                <option value="Venta">Venta</option>
+                <option value="Fueradezona">
+                Fuera de zona
                 </option>
-                <option value="Ya es Socio">Ya es Socio</option>
-                <option value="Busca Otra Cobertura">
-                  Busca Otra Cobertura
+                <option value="Fueradeedad">Fuera de edad</option>
+                <option value="Preexistencia">
+                Preexistencia
                 </option>
-                <option value="Teléfono Erróneochazado">
-                  Teléfono Erróneo
+                <option value="Reafiliación">
+                Reafiliación
                 </option>
-                <option value="Email Erróneo">Email Erróneo</option>
-                <option value="No le iInteresa por Costos">
-                  No le iInteresa por Costos
-                </option>
-
-                <option value="No le iInteresa por Cartilla">
-                  No le iInteresa por Cartilla
+                <option value="Nocontesta">No contesta</option>
+                <option value="pruebainterna">
+                prueba interna
                 </option>
 
-                <option value="Tomó Otra Cobertura">Tomó Otra Cobertura</option>
+                <option value="Yaessocio">
+                Ya es socio
+                </option>
+
+                <option value="BuscaotraCobertura">Busca otra Cobertura</option>
+                
+                <option value="Teléfonoerróneo">Teléfono erróneo</option>
+                
+                <option value="Noleinteresaeconómico">No le interesa (económico)</option>
+                
+                <option value="Noleinteresacartilla">No le interesa cartilla</option>
               </Form.Control>
             </Form.Group>
 
