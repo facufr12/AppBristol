@@ -1,11 +1,13 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?func=login";
+const API_URL = process.env.REACT_APP_API_URL;
 
 const login = async (credentials) => {
   try {
-    const response = await fetch(API_URL, {
+    // Construimos la URL con el parámetro `func=login`
+    const loginUrl = `${API_URL}?func=login`;
+
+    const response = await fetch(loginUrl, {
       method: "POST",
- 
+    
       body: JSON.stringify({
         usuario: credentials.usuario,
         contraseña: credentials.contraseña,
@@ -14,17 +16,16 @@ const login = async (credentials) => {
 
     const data = await response.json();
 
-    // Verifica si la respuesta indica éxito
     if (!response.ok) {
       console.error("Error del servidor:", data.error);
       throw new Error(data.message || "Error en la autenticación");
     }
 
-    console.log('Datos recibidos del servidor:', data); // Log de la respuesta del servidor
+    console.log("Datos recibidos del servidor:", data);
 
     // Guarda la información necesaria en localStorage
-    localStorage.setItem('userData', JSON.stringify(data.user)); // Ajusta según la estructura de tu respuesta
-    localStorage.setItem('token', data.token); // Suponiendo que también recibes un token
+    localStorage.setItem("userData", JSON.stringify(data.user)); // Ajusta según la estructura de tu respuesta
+    localStorage.setItem("token", data.token); // Suponiendo que también recibes un token
 
     return data; // Devuelve la respuesta del servidor
   } catch (error) {

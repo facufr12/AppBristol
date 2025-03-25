@@ -14,7 +14,9 @@ const CommonHeaderTabs = () => {
 	const handleBack = () => {
 		navigate('/user/instructor'); // Redirige al hacer clic en el botón
 	};
-
+	const handleCrearPoliza = () => {
+		navigate('/user/checkout'); // Redirige a la página de creación de póliza
+	  }
 	return (
 		<Fragment>
 			<Row>
@@ -28,12 +30,12 @@ const CommonHeaderTabs = () => {
 							{/* Botón "Volver" */}
 							<Button 	className="ms-3 mb-2" onClick={handleBack} variant="secondary">Volver</Button>
 							<Button 
-    variant="primary" 
-    className="ms-3 mb-2"
-    onClick={() => window.location.href = '/user/instructor'}
->
-    Crear Póliza
-</Button>
+                variant="primary" 
+                className="ms-3 mb-2"
+                onClick={handleCrearPoliza}
+              >
+                Crear Póliza
+              </Button>
 
 						</div>
 					</div>

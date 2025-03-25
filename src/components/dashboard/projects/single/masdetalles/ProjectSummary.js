@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Card, ListGroup, Dropdown, Modal, Button } from "react-bootstrap";
+import { Card, ListGroup, Dropdown, Modal,Spinner, Button } from "react-bootstrap";
 import { FaWhatsapp } from "react-icons/fa";
 import {
   BsPersonFill,
@@ -12,14 +12,25 @@ import {
   BsCreditCard2BackFill,
   BsFillSendFill
 } from "react-icons/bs";
-
+const getFirstSentence = (text) => {
+  if (!text) return "Sin Comentarios";
+  const match = text.match(/[^.!?]*[.!?]/); // Busca la primera oración completa
+  return match ? match[0] + " ..." : text.substring(0, 50) + " ..."; // Si no hay puntuación, corta después de 50 caracteres
+};
 import CustomToast from "components/dashboard/authentication/Toast";
 const ProjectSummary = () => {
   const location = useLocation();
   const { prospecto } = location.state || {};
-
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [showModal, setShowModal] = useState(false);
   const [comentario, setComentario] = useState("");
+
+  useEffect(() => {
+    setComentario(prospecto?.comentario || "");
+  }, [prospecto]);
 
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
@@ -32,21 +43,24 @@ const ProjectSummary = () => {
   const handleComentarioChange = (e) => setComentario(e.target.value);
 
   const enviarComentario = async () => {
+    setIsLoading(true); // Activa el estado de carga
+  
     const data = {
       id: prospecto?.id || "",
       vendedor: prospecto?.vendedor || "",
       comentario
     };
-
+  
     try {
+      const apiUrl = process.env.REACT_APP_API_URL; // Obtén la URL base de la variable de entorno
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?func=agregarComentario",
+        `${apiUrl}?func=agregarComentario`, // Concatenamos el parámetro de la función
         {
           method: "POST",
           body: JSON.stringify(data),
         }
       );
-
+  
       if (response.ok) {
         setToastConfig({
           show: true,
@@ -70,6 +84,8 @@ const ProjectSummary = () => {
         title: "Error",
         variant: "danger",
       });
+    } finally {
+      setIsLoading(false); // Desactiva el estado de carga después de la respuesta
     }
   };
   const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -137,7 +153,7 @@ const ProjectSummary = () => {
   
   
     // Construir el enlace con el mensaje en línea
-    const message = '"Hola, cómo estás? te escribo de Bristol Medicine | Medicina Por Médicos"';
+    const message = "Hola, cómo estás? te escribo de Bristol | Medicina Privada";
     const encodedMessage = encodeURIComponent(message);
     const link = `https://wa.me/${cleanNumber}?text=${encodedMessage}`;
   
@@ -161,7 +177,7 @@ const ProjectSummary = () => {
                 <div className="d-flex align-items-center">
                   <BsPersonFill size={16} className="text-primary" />
                   <div className="ms-2">
-                    <h5 className="mb-0 text-body">Nombre</h5>
+                    <h5 className="mb-0 text-body">Razón Social</h5>
                   </div>
                 </div>
                 <div>
@@ -174,9 +190,9 @@ const ProjectSummary = () => {
             <ListGroup.Item className="px-0">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                  <BsPersonVcardFill size={16} className="text-primary" />
+                <BsGeoAltFill size={16} className="text-primary" />
                   <div className="ms-2">
-                    <h5 className="mb-0 text-body">Edad</h5>
+                    <h5 className="mb-0 text-body">Cápitas</h5>
                   </div>
                 </div>
                 <div>
@@ -191,7 +207,7 @@ const ProjectSummary = () => {
                 <div className="d-flex align-items-center">
                   <BsCreditCard2BackFill size={16} className="text-primary" />
                   <div className="ms-2">
-                    <h5 className="mb-0 text-body">Tipo de Afiliación</h5>
+                    <h5 className="mb-0 text-body">Nombre del Contacto</h5>
                   </div>
                 </div>
                 <div>
@@ -206,7 +222,7 @@ const ProjectSummary = () => {
                 <div className="d-flex align-items-center">
                   <BsHouseFill size={16} className="text-primary" />
                   <div className="ms-2">
-                    <h5 className="mb-0 text-body">Grupo Familiar</h5>
+                    <h5 className="mb-0 text-body">Cotización</h5>
                   </div>
                 </div>
                 <div>
@@ -230,21 +246,20 @@ const ProjectSummary = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-      <FaWhatsapp
-  size={30}
-  style={{
-    color: "#0C662C", // Aplica directamente el color al ícono
-  }}
-/>
+        <FaWhatsapp
+          size={30}
+          style={{
+            fill: "rgb(12, 102, 44)", // Aplicar el color directamente
+          }}
+        />
       </a>
     </div>
   </div>
 </ListGroup.Item>
-
             <ListGroup.Item className="px-0">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                  <BsGeoAltFill size={16} className="text-primary" />
+                  <BsPersonVcardFill size={16} className="text-primary" />
                   <div className="ms-2">
                     <h5 className="mb-0 text-body">Partido</h5>
                   </div>
@@ -257,30 +272,29 @@ const ProjectSummary = () => {
               </div>
             </ListGroup.Item>
             <ListGroup.Item className="px-0">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <BsFillEnvelopeOpenFill size={16} className="text-primary" />
-                  <div className="ms-2">
-                    <h5 className="mb-0 text-body">Correo</h5>
-                  </div>
-                </div>
-                <div>
-                 <a
-                    href={getMailToLink(prospecto.correo)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                  <BsFillEnvelopeOpenFill
-  size={30}
-  style={{
-    color: "#0C662C", // Aplica el mismo color
-  }}
-/>
-
-                  </a>
-                </div>
-              </div>
-            </ListGroup.Item>
+  <div className="d-flex justify-content-between align-items-center">
+    <div className="d-flex align-items-center">
+      <BsFillEnvelopeOpenFill size={16} className="text-primary" />
+      <div className="ms-2">
+        <h5 className="mb-0 text-body">Correo</h5>
+      </div>
+    </div>
+    <div>
+      <a
+        href={getMailToLink(prospecto.correo)}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <BsFillEnvelopeOpenFill
+          size={30}
+          style={{
+            fill: "rgb(12, 102, 44)", // Aplicar el color directamente
+          }}
+        />
+      </a>
+    </div>
+  </div>
+</ListGroup.Item>
             <ListGroup.Item className="px-0">
               <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
@@ -297,20 +311,65 @@ const ProjectSummary = () => {
               </div>
             </ListGroup.Item>
             <ListGroup.Item className="px-0">
-              <div className="d-flex justify-content-between align-items-center">
-                <div className="d-flex align-items-center">
-                  <BsFillEnvelopeOpenFill size={16} className="text-primary" />
-                  <div className="ms-2">
-                    <h5 className="mb-0 text-body">Comentarios Agregados</h5>
-                  </div>
-                </div>
-                <div>
-                  <p className="text-dark mb-0 fw-semi-bold">
-                    {prospecto.comentario || "Sin Comentarios"}
-                  </p>
-                </div>
-              </div>
-            </ListGroup.Item>
+        <div className="d-flex justify-content-between align-items-center">
+          <div className="d-flex align-items-center">
+            <BsFillEnvelopeOpenFill size={16} className="text-primary" />
+            <div className="ms-2">
+              <h5 className="mb-0 text-body">Comentarios Agregados</h5>
+            </div>
+          </div>
+
+          <div>
+            <Button
+              variant="link"
+              className="text-dark fw-semi-bold p-0 text-start"
+              style={{
+                maxWidth: "200px",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+              }}
+              onClick={handleShow}
+            >
+              {getFirstSentence(prospecto.comentario)}
+            </Button>
+          </div>
+        </div>
+      </ListGroup.Item>
+
+      {/* Modal */}
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Comentario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex flex-wrap text-break">
+            {prospecto.comentario || "No hay comentarios disponibles."}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal */}
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Comentario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex flex-wrap text-break">
+            {prospecto.comentario || "No hay comentarios disponibles."}
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
           </ListGroup>
           <Button variant="primary" className="mt-4" onClick={handleShowModal}>
             Agregar Comentario
@@ -334,9 +393,16 @@ const ProjectSummary = () => {
               <Button variant="secondary" onClick={handleCloseModal}>
                 Cerrar
               </Button>
-              <Button variant="primary" onClick={enviarComentario}>
-                Guardar Comentario
-              </Button>
+              <Button variant="primary" onClick={enviarComentario} disabled={isLoading}>
+      {isLoading ? (
+        <>
+          <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+          {" "}Guardando...
+        </>
+      ) : (
+        "Guardar Comentario"
+      )}
+    </Button>
             </Modal.Footer>
           </Modal>
         </Card.Body>

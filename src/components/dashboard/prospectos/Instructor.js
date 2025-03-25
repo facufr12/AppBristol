@@ -15,6 +15,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import ProspectForm from "./addform";
 import { useAuth } from "../authentication/AuthContext";
+
 const Instructor = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,27 +43,26 @@ const Instructor = () => {
     "Busca otra Cobertura",
     "Teléfono erróneo",
     "No le interesa (económico)",
-    
-    "No le interesa cartilla",
+    "No le interesa cartilla",
   ];
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const apiUrl = `https://script.google.com/macros/s/AKfycbzMtfpBMeA-suybFvBj3ueI59yVJhGKx0pSb9tHG0VakZO0aWrZBoipTiMiXYGRCRt8/exec?vendedor=${userData.vendedor}&func=obtenerDatos`;
-  
+    const apiUrl = `${process.env.REACT_APP_API_URL}?vendedor=${userData.vendedor}&func=obtenerDatos`;
+
     const fetchGoogleSheetsData = async () => {
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-  
-        // Aseguramos que 'data' sea un arreglo y lo ordenamos
+
+        // Asegurarse de que la respuesta sea un arreglo
         if (Array.isArray(data)) {
-          const sortedData = data.reverse(); // Cambia el orden a último primero
+          const sortedData = data.reverse();
           setData(sortedData);
         } else {
           console.warn('Respuesta de la API no es un arreglo:', data);
-          setData([]); // Establecemos un arreglo vacío si no es un arreglo
+          setData([]);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -70,10 +70,9 @@ const Instructor = () => {
         setLoading(false);
       }
     };
-  
     fetchGoogleSheetsData();
   }, [userData.vendedor]);
-  
+
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastTitle, setToastTitle] = useState("");
@@ -83,7 +82,9 @@ const Instructor = () => {
       person.nombre.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedEstado === "" || person.estado === selectedEstado)
   );
+
   const [isLoading, setIsLoading] = useState(false);
+
   const handleEstadoChange = (person, newEstado) => {
     setData((prevData) =>
       prevData.map((p) =>
@@ -93,10 +94,11 @@ const Instructor = () => {
   };
 
   const enviarDatos = async (id, estado) => {
-    setIsLoading(true); // Deshabilitar el botón
+    setIsLoading(true);
     try {
+      const apiUrl = process.env.REACT_APP_API_URL;
       const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbx-m9-qQ3Gf2PhZAfcOaf8FnI9u7C_2zWbcWxJqGOaCps5EOd8MHQ9qvS34wa-WY8Aq/exec?func=cambiarEstadoDato",
+        `${apiUrl}?func=cambiarEstadoDato`,
         {
           method: "POST",
           body: JSON.stringify({ id, estado }),
@@ -107,7 +109,6 @@ const Instructor = () => {
         throw new Error("Error al enviar los datos");
       }
       const resultado = await response.json();
-      // Mostrar Toast de éxito
       setToastTitle("Éxito");
       setToastMessage(
         "Datos enviados correctamente: " + JSON.stringify(resultado)
@@ -115,15 +116,13 @@ const Instructor = () => {
       setShowToast(true);
     } catch (error) {
       console.error("Error en la solicitud:", error);
-
-      // Mostrar Toast de error
       setToastTitle("Error");
       setToastMessage(
         "Error al enviar los datos. Por favor, intenta nuevamente."
       );
       setShowToast(true);
     } finally {
-      setIsLoading(false); // Habilitar el botón nuevamente
+      setIsLoading(false);
     }
   };
 
@@ -146,7 +145,7 @@ const Instructor = () => {
         />
         <Row>
           {paginatedData.map((person, index) => (
-            <Col key={index} xl={4} lg={6} md={6} xs={12} className="mb-4">
+            <Col key={person.id} xl={4} lg={6} md={6} xs={12} className="mb-4">
               <div
                 className="card border-light shadow-sm"
                 style={{ borderRadius: "40px" }}
@@ -157,7 +156,7 @@ const Instructor = () => {
                       <div
                         className="avatar"
                         style={{
-                          backgroundColor: "#0C662C",
+                          backgroundColor: "#094d21",
                           color: "white",
                           width: "70px",
                           height: "70px",
@@ -182,7 +181,7 @@ const Instructor = () => {
                     </div>
                     <h6
                       className="text-uppercase mb-1"
-                      style={{ color: "#0C662C" }}
+                      style={{ color: "#094d21" }}
                     >
                       {person.partido || "SIN PARTIDO"}
                     </h6>
@@ -213,7 +212,7 @@ const Instructor = () => {
                           handleEstadoChange(person, e.target.value)
                         }
                         className="text-dark ms-3"
-                        style={{ marginLeft: "10px", width: "200px" }}
+                        style={{ marginLeft: "10px", width: "150px" }}
                       >
                         {estados.map((estado, index) => (
                           <option key={index} value={estado}>
@@ -224,14 +223,19 @@ const Instructor = () => {
                       <Button
                         variant="primary"
                         style={{
+                          backgroundColor: '#094d21',
                           marginLeft: "10px",
                           padding: "2px 5px",
                           fontSize: "17px",
                         }}
                         onClick={() => enviarDatos(person.id, person.estado)}
-                        disabled={isLoading} // Deshabilitar el botón
+                        disabled={isLoading}
                       >
-                        <i className="fas fa-arrow-up"></i>
+                        {isLoading ? (
+                          <Spinner animation="border" size="sm" />
+                        ) : (
+                          <i className="fas fa-arrow-up"></i>
+                        )}
                       </Button>
                     </div>
                   </div>
@@ -251,26 +255,24 @@ const Instructor = () => {
                   <div className="d-flex justify-content-between border-bottom py-2 mt-3">
                     <span>Celular</span>
                     <span className="text-dark d-flex align-items-center">
-  <a
-    href={`https://wa.me/+54${person.cel}?text=${encodeURIComponent(
-        "Hola, te contacto de Cober para poder ayudarte a Cotizar tu plan."
-    )}`}
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ display: "flex", alignItems: "center" }}
-  >
-    <FaWhatsapp
-      style={{
-        width: "34px",
-        height: "34px",
-        color: "#25D366",
-      }}
-    />
-  </a>
-</span>
-
+                      <a
+                        href={`https://wa.me/+54${person.cel}?text=${encodeURIComponent(
+                          "Hola, te contacto de Bristol para poder ayudarte a Cotizar tu plan."
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ display: "flex", alignItems: "center" }}
+                      >
+                        <FaWhatsapp
+                          style={{
+                            width: "34px",
+                            height: "34px",
+                            color: "#094d21",
+                          }}
+                        />
+                      </a>
+                    </span>
                   </div>
-                  {/* Agregando el Progress Bar para la evolución */}
                   <div className="mt-3">
                     <span>Evolución</span>
                     <div className="position-relative mt-4">
@@ -280,7 +282,7 @@ const Instructor = () => {
                           role="progressbar"
                           style={{
                             width: `${person.evolucion}%`,
-                            backgroundColor: "#0C662C",
+                            backgroundColor: "#094d21",
                           }}
                           aria-valuenow={person.evolucion}
                           aria-valuemin="0"
@@ -290,10 +292,10 @@ const Instructor = () => {
                       <span
                         style={{
                           position: "absolute",
-                          top: "-25px", // Ajusta la posición vertical según sea necesario
+                          top: "-25px",
                           left: "50%",
                           transform: "translateX(-50%)",
-                          color: "#0C662C",
+                          color: "#094d21",
                           fontWeight: "bold",
                         }}
                       >
@@ -320,7 +322,6 @@ const Instructor = () => {
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
             />
-
             {Array.from(
               {
                 length: Math.min(
@@ -344,7 +345,6 @@ const Instructor = () => {
                 );
               }
             )}
-
             <Pagination.Next
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={
@@ -356,11 +356,13 @@ const Instructor = () => {
       </>
     );
   };
+
   const handleDetailsClick = (person) => {
     navigate("/dashboard/projects/single/overview", {
       state: { prospecto: person },
     });
   };
+
   const createTable = (data) => (
     <div style={{ overflowX: "auto" }}>
       <Table striped bordered hover>
@@ -377,7 +379,7 @@ const Instructor = () => {
         </thead>
         <tbody>
           {data.map((person, index) => (
-            <tr key={index}>
+            <tr key={person.id}>
               <td>{person.nombre}</td>
               <td>{person.edad}</td>
               <td>{person.partido}</td>
@@ -389,8 +391,7 @@ const Instructor = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FaWhatsapp size={30} />{" "}
-                  {/* O usa style={{ fontSize: '30px' }} */}
+                  <FaWhatsapp size={30} />
                 </a>
               </td>
               <td>
@@ -440,6 +441,7 @@ const Instructor = () => {
           <Button
             onClick={() => setShowModal(true)}
             variant="primary"
+            style={{ backgroundColor: '#094d21' }}
             className="mb-3"
           >
             Agregar Prospecto
