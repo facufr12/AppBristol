@@ -17,28 +17,28 @@ const ProjectSummary = () => {
 
 
   const sheetNames = [
-    "WagonPrestadores",
-    "ClassicXPrestadores",
-    "TayloredPrestadores",
-    "CoberXPrestadores"
+    "BM500Prestadores",
+    "BM400Prestadores",
+    "BM200Prestadores",
+    "BM180Prestadores"
   ];
 
   const sheetCobertura = [
-    "WagonCobertura",
-    "ClassicXCobertura",
-    "TayloredCobertura",
-    "CoberXCobertura"
+    "BM500Cobertura",
+    "BM400Cobertura",
+    "BM200Cobertura",
+    "BM180Cobertura"
   ];
 
   const sheetDisplayNames = {
-    WagonPrestadores: "WAGON",
-    ClassicXPrestadores: "CLASSIC X",
-    TayloredPrestadores: "TAYLORED",
-    CoberXPrestadores: "COBER X",
-    WagonCobertura: "WAGON",
-    ClassicXCobertura: "CLASSIC X",
-    TayloredCobertura: "TAYLORED",
-    CoberXCobertura: "COBER X"
+    BM500Prestadores: "BM500",
+    BM400Prestadores: "BM400",
+    BM200Prestadores: "BM200",
+    BM180Prestadores: "BM180",
+    BM500Cobertura: "BM500",
+    BM400Cobertura: "BM400",
+    BM200Cobertura: "BM200",
+    BN180Cobertura: "BM180"
   };
 
   const [allData, setAllData] = useState({});
@@ -48,7 +48,7 @@ const ProjectSummary = () => {
   useEffect(() => {
     const fetchData = async () => {
       const url =
-        "https://script.google.com/macros/s/AKfycby59xET9lbPnJz14gYd-XcwUFxA_nYU0K8EQsK4N56F6BlJb-C33VDGM0nhcQGcZaCS8g/exec";
+        "https://script.google.com/macros/s/AKfycbzTqNjaxf8N55ZAhSuIPUgBVt-90wtJ3tT4-OhdEKtljfJfw0POZiBdd-UFeRFx0Uc4UQ/exec";
       const newData = {};
 
       try {

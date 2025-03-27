@@ -29,14 +29,14 @@ const CommonHeaderTabs = () => {
 						<div className="d-flex align-items-center">
 							{/* Botón "Volver" */}
 							<Button 	className="ms-3 mb-2" onClick={handleBack} variant="secondary">Volver</Button>
-							<Button 
+					 {/*		<Button 
                 variant="primary" 
                 className="ms-3 mb-2"
                 onClick={handleCrearPoliza}
               >
                 Crear Póliza
-              </Button>
-
+             </Button>
+		   */} `
 						</div>
 					</div>
 				</Col>

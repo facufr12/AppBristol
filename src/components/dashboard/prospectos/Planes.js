@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Planes = () => {
   const sheetNames = [
-    'WagonPrestadores',
-    'ClassicXPrestadores',
-    'TayloredPrestadores',
-    'CoberXPrestadores'
+    'BM500Prestadores',
+    'BM400Prestadores',
+    'BM200Prestadores',
+    'BM180Prestadores'
   ]; // Nombres de las hojas
   const [allData, setAllData] = useState({}); // Almacena los datos de cada hoja
   const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const Planes = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = "https://script.google.com/macros/s/AKfycbxEfOmZQCILGv7lk-P8o0OJJ4IY94fwm7SnJoJHfhNUaHAwChC6tn3R9uDlYSHVgall-w/exec";
+      const url = "https://script.google.com/macros/s/AKfycbzTqNjaxf8N55ZAhSuIPUgBVt-90wtJ3tT4-OhdEKtljfJfw0POZiBdd-UFeRFx0Uc4UQ/exec";
       const newData = {};
 
       try {

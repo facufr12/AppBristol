@@ -28,14 +28,14 @@ export const DashboardMenu = [
     ]
   },
   // Planes
-  {
-    id: uuid(),
-    title: "Planes",
-    icon: "calendar",
-    children: [
-      { id: uuid(), link: "/prestadores/projectprestadores", name: "Cobertura / Zonas" }
-    ]
-  },
+  // {
+ // id: uuid(),
+  //   title: "Planes",
+  //  icon: "calendar",
+   // children: [
+ //     { id: uuid(), link: "/prestadores/projectprestadores", name: "Cobertura / Zonas" }
+ //   ]
+ // },
 ];
 
 export default DashboardMenu;
