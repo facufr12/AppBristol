@@ -281,10 +281,10 @@ const Instructor = () => {
         className="progress-bar"
         role="progressbar"
         style={{
-          width: `${Math.round(person.evolucion * 100)}%`,
+          width: `${Math.round(person.evolucion )}%`,
           backgroundColor: "#094d21",
         }}
-        aria-valuenow={Math.round(person.evolucion * 100)}
+        aria-valuenow={Math.round(person.evolucion )}
         aria-valuemin="0"
         aria-valuemax="100"
       />
