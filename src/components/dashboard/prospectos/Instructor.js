@@ -299,7 +299,7 @@ const Instructor = () => {
         fontWeight: "bold",
       }}
     >
-      {Math.round(person.evolucion * 100)}%
+      {Math.round(person.evolucion)}%
     </span>
   </div>
 </div>
