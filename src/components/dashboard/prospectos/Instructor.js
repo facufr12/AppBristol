@@ -29,8 +29,8 @@ const Instructor = () => {
   const estados = [
     "Lead",
     "1º Contacto",
-    "Calificado Cotización ",
-    "Calificado Póliza ",
+    "Calificado Cotización",
+    "Calificado Póliza",
     "Calificado Pago",
     "Venta",
     "Fuera de zona",
